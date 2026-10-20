@@ -116,6 +116,9 @@ void inserirElemento()
 {
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
+	NO* atual = primeiro;
+	NO* anterior = NULL;
+
 	if (novo == NULL)
 	{
 		return;
@@ -125,19 +128,28 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-	if (primeiro == NULL)
+	while (atual != NULL && atual->valor < novo->valor) {
+		anterior = atual;
+		atual = atual->prox;
+	}
+
+	if (atual != NULL && atual->valor == novo->valor)
 	{
-		primeiro = novo;
+		cout << "Valor ja registrado" << endl;
+		free(novo);
 	}
 	else
 	{
-		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
+		if (anterior == NULL) {
+			primeiro = novo;
 		}
-		aux->prox = novo;
+		else {
+			anterior != NULL;
+			anterior->prox = novo;
+		}
+		novo->prox = atual;
 	}
+
 }
 
 void excluirElemento()
@@ -147,7 +159,22 @@ void excluirElemento()
 
 void buscarElemento()
 {
+	int numero = 0;
+	NO* auxiliar = primeiro;
 
+	cout << "Digite o numero que deseja buscar" << endl;
+	cin >> numero;
+
+	while (auxiliar != NULL) {
+		auxiliar = auxiliar->prox;
+		if (auxiliar->valor == numero) {
+			cout << "Numero encontrado" << endl;
+		}
+		else {
+			auxiliar->valor > numero;
+			cout << "Numero nao encontrado" << endl;
+		}
+	}
 }
 
 
