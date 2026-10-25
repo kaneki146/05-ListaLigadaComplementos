@@ -8,6 +8,7 @@ struct NO {
 };
 
 NO* primeiro = NULL;
+NO* ultimo = NULL;
 
 // headers
 void menu();
@@ -116,6 +117,8 @@ void inserirElemento()
 {
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
+	NO* atual = primeiro;
+	NO* anterior = NULL;
 	if (novo == NULL)
 	{
 		return;
@@ -125,29 +128,75 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-	if (primeiro == NULL)
-	{
-		primeiro = novo;
+	while (atual != NULL && atual->valor < novo->valor) {
+		anterior = atual;
+		atual = atual->prox;
+	}
+
+	if (atual != NULL && atual->valor == novo->valor) {
+		cout << "O valor ja existe" << endl;
+		free(novo);
 	}
 	else
 	{
 		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
-		}
-		aux->prox = novo;
+		anterior != NULL;
+		anterior->prox = novo;
 	}
+	novo->prox = atual;
 }
 
 void excluirElemento()
 {
-
+	NO* atual = primeiro;
+	NO* anterior = NULL;
+	int valor;
+	cout << "Digite o valor que deseja excluir" << endl;
+	cin >> valor;
+	while (atual != NULL && atual->valor < valor) {
+		anterior = atual;
+		atual = atual->prox;
+	}
+	if (atual == NULL) {
+		cout << "Valor nao encontrado" << endl;
+		return;
+	}
+	if (atual->valor > valor) {
+		cout << "Valor nao encontrado" << endl;
+		return;
+	}
+	if (anterior == NULL) {
+		primeiro = atual->prox;
+	}
+	else {
+		anterior->prox = atual->prox;
+	}
+	if (atual == ultimo) {
+		ultimo = anterior;
+	}
+	free(atual);
 }
 
 void buscarElemento()
 {
+	NO* aux = primeiro;
+	int valor = 0;
+	cout << "Digite o numero que deseja encontrar" << endl;
+	cin >> valor;
 
+	while (aux != NULL) {
+		if (aux->valor == valor) {
+			cout << "Numero encontrado" << endl;
+			return;
+		}
+		if (aux->valor > valor) {
+			cout << "Numero nao encontrado" << endl;
+			return;
+		}
+		aux = aux->prox;
+	}
+
+	cout << "Numero nao encontrado" << endl;
 }
 
 
