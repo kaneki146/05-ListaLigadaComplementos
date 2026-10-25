@@ -81,6 +81,7 @@ void inicializar()
 	}
 
 	primeiro = NULL;
+	ultimo = NULL;
 	cout << "Lista inicializada \n";
 
 }
@@ -136,14 +137,20 @@ void inserirElemento()
 	if (atual != NULL && atual->valor == novo->valor) {
 		cout << "O valor ja existe" << endl;
 		free(novo);
+		return;
 	}
-	else
-	{
-		// procura o final da lista
-		anterior != NULL;
+
+	novo->prox = atual;
+
+	if (anterior == NULL) {
+		primeiro = novo;
+	}
+	else {
 		anterior->prox = novo;
 	}
-	novo->prox = atual;
+	if (atual == NULL) {
+		ultimo = novo;
+	}
 }
 
 void excluirElemento()
