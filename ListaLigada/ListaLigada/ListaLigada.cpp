@@ -8,6 +8,7 @@ struct NO {
 };
 
 NO* primeiro = NULL;
+NO* ultimo = NULL;
 
 // headers
 void menu();
@@ -79,6 +80,8 @@ void inicializar()
 	}
 
 	primeiro = NULL;
+	ultimo = NULL;
+	ultimo = NULL;
 	cout << "Lista inicializada \n";
 
 }
@@ -126,17 +129,14 @@ void inserirElemento()
 
 	if (primeiro == NULL)
 	{
-		primeiro = novo;
+		primeiro = novo; ultimo = novo;
 	}
 	else
 	{
 		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
+		ultimo->prox = novo;
+		ultimo = novo;
 		}
-		aux->prox = novo;
-	}
 }
 
 void excluirElemento()
